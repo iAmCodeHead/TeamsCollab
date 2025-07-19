@@ -82,7 +82,6 @@ const TaskTable = () => {
     setPageSize(size);
   };
 
-  console.log('seletec task', selectedTask);
   return (
     <div className="w-full relative">
       <DataTable
