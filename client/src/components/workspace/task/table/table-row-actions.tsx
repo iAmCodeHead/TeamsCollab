@@ -18,6 +18,7 @@ import useWorkspaceId from "@/hooks/use-workspace-id";
 import { deleteTaskMutationFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
 import EditTaskDialog from "../edit-task-dialog"; // Import the Edit Dialog
+import ViewTaskDialog from "../view-task-dialog";
 
 interface DataTableRowActionsProps {
   row: Row<TaskType>;
@@ -26,6 +27,7 @@ interface DataTableRowActionsProps {
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
   const [openDeleteDialog, setOpenDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false); // State for edit dialog
+  const [openViewDialog, setViewDialog] = useState(false);
 
   const queryClient = useQueryClient();
   const workspaceId = useWorkspaceId();
@@ -70,6 +72,12 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
+          {/* View Task Option */}
+          <DropdownMenuItem className="cursor-pointer" onClick={() => setViewDialog(true)}>
+            <Pencil className="w-4 h-4 mr-2" /> View Task
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+
           {/* Delete Task Option */}
           <DropdownMenuItem
             className="!text-destructive cursor-pointer"
@@ -83,6 +91,9 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
 
       {/* Edit Task Dialog */}
       <EditTaskDialog task={task} isOpen={openEditDialog} onClose={() => setOpenEditDialog(false)} />
+
+      {/* View Task Dialog */}
+      <ViewTaskDialog task={task} isOpen={openViewDialog} onClose={() => setViewDialog(false)} />
 
       {/* Delete Task Confirmation Dialog */}
       <ConfirmDialog

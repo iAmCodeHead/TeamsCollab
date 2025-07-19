@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "../../ui/textarea";
+// import { Textarea } from "../../ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import useWorkspaceId from "@/hooks/use-workspace-id";
 import { TaskPriorityEnum, TaskStatusEnum } from "@/constant";
@@ -34,6 +34,7 @@ import { editTaskMutationFn } from "@/lib/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
 import { TaskType } from "@/types/api.type";
+import Editor from 'react-simple-wysiwyg';
 
 export default function EditTaskForm({ task, onClose }: { task: TaskType; onClose: () => void }) {
   const queryClient = useQueryClient();
@@ -138,7 +139,10 @@ export default function EditTaskForm({ task, onClose }: { task: TaskType; onClos
             <FormField control={form.control} name="description" render={({ field }) => (
               <FormItem>
                 <FormLabel>Task Description</FormLabel>
-                <FormControl><Textarea {...field} rows={2} placeholder="Description" /></FormControl>
+                <FormControl>
+                  <Editor value={field.value} onChange={(e) => form.setValue("description", e.target.value)} ></Editor>
+                  {/* <Textarea {...field} rows={4} placeholder="Description" /> */}
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )} />

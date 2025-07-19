@@ -16,6 +16,7 @@ import useGetProjectsInWorkspaceQuery from "@/hooks/api/use-get-projects";
 import useGetWorkspaceMembers from "@/hooks/api/use-get-workspace-members";
 import { getAvatarColor, getAvatarFallbackText } from "@/lib/helper";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import EditTaskDialog from "./edit-task-dialog";
 
 type Filters = ReturnType<typeof useTaskTableFilter>[0];
 type SetFilters = ReturnType<typeof useTaskTableFilter>[1];
@@ -34,9 +35,17 @@ const TaskTable = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
+  const [selectedTask, setSelectedTask] = useState<TaskType | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleRowClick = (task: TaskType) => {
+    setSelectedTask(task);
+    setIsModalOpen(true);
+  };
+
   const [filters, setFilters] = useTaskTableFilter();
   const workspaceId = useWorkspaceId();
-  const columns = getColumns(projectId);
+  const columns = getColumns(projectId, handleRowClick);
 
   const { data, isLoading } = useQuery({
     queryKey: [
@@ -73,6 +82,7 @@ const TaskTable = () => {
     setPageSize(size);
   };
 
+  console.log('seletec task', selectedTask);
   return (
     <div className="w-full relative">
       <DataTable
@@ -95,6 +105,7 @@ const TaskTable = () => {
           />
         }
       />
+      {selectedTask && <EditTaskDialog task={selectedTask} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
     </div>
   );
 };

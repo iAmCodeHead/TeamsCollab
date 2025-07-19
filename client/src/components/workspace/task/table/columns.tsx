@@ -20,7 +20,7 @@ import { priorities, statuses } from "./data";
 import { TaskType } from "@/types/api.type";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export const getColumns = (projectId?: string): ColumnDef<TaskType>[] => {
+export const getColumns = (projectId?: string, onRowClick?: (task: TaskType) => void): ColumnDef<TaskType>[] => {
   const columns: ColumnDef<TaskType>[] = [
     {
       id: "_id",
@@ -53,7 +53,7 @@ export const getColumns = (projectId?: string): ColumnDef<TaskType>[] => {
       ),
       cell: ({ row }) => {
         return (
-          <div className="flex flex-wrap space-x-2">
+          <div className="flex flex-wrap cursor-pointer space-x-2" onClick={() => onRowClick?.(row.original)}>
             <Badge variant="outline" className="capitalize shrink-0 h-[25px]">
               {row.original.taskCode}
             </Badge>
@@ -104,7 +104,7 @@ export const getColumns = (projectId?: string): ColumnDef<TaskType>[] => {
 
         return (
           name && (
-            <div className="flex items-center gap-1">
+            <div className="flex cursor-pointer items-center gap-1" onClick={() => onRowClick?.(row.original)}>
               <Avatar className="h-6 w-6">
                 <AvatarImage src={assignee?.profilePicture || ""} alt={name} />
                 <AvatarFallback className={avatarColor}>
@@ -126,7 +126,7 @@ export const getColumns = (projectId?: string): ColumnDef<TaskType>[] => {
       ),
       cell: ({ row }) => {
         return (
-          <span className="lg:max-w-[100px] text-sm">
+          <span className="lg:max-w-[100px] text-sm cursor-pointer" onClick={() => onRowClick?.(row.original)}>
             {row.original.dueDate ? format(row.original.dueDate, "PPP") : null}
           </span>
         );
@@ -156,7 +156,7 @@ export const getColumns = (projectId?: string): ColumnDef<TaskType>[] => {
         }
 
         return (
-          <div className="flex lg:w-[120px] items-center">
+          <div className="flex lg:w-[120px] items-center cursor-pointer" onClick={() => onRowClick?.(row.original)}>
             <Badge
               variant={TaskStatusEnum[statusKey]}
               className="flex w-auto p-1 px-2 gap-1 font-medium shadow-sm uppercase border-0"
@@ -192,7 +192,7 @@ export const getColumns = (projectId?: string): ColumnDef<TaskType>[] => {
         }
 
         return (
-          <div className="flex items-center">
+          <div className="flex items-center cursor-pointer" onClick={() => onRowClick?.(row.original)}>
             <Badge
               variant={TaskPriorityEnum[statusKey]}
               className="flex lg:w-[110px] p-1 gap-1 !bg-transparent font-medium !shadow-none uppercase border-0"
