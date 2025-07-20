@@ -48,7 +48,7 @@ Create a `.env` file in the root of your project and configure these variables:
 ```plaintext  
 PORT=8000
 NODE_ENV=development
-MONGO_URI="mongodb+srv://<username>:<password>@<>.mongodb.net/teamsync_db"  
+MONGO_URI="mongodb+srv://<username>:<password>@<>.mongodb.net/db_name"  
 
 SESSION_SECRET="session_secret_key"
 

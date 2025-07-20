@@ -60,16 +60,16 @@ const InviteUser = () => {
           className="flex items-center gap-2 self-center font-medium"
         >
           <Logo />
-          Team Sync.
+          Team Collab.
         </Link>
         <div className="flex flex-col gap-6">
           <Card>
             <CardHeader className="text-center">
               <CardTitle className="text-xl">
-                Hey there! You're invited to join a TeamSync Workspace!
+                Hey there! You're invited to join a TeamCollab Workspace!
               </CardTitle>
               <CardDescription>
-                Looks like you need to be logged into your TeamSync account to
+                Looks like you need to be logged into your TeamCollab account to
                 join this Workspace.
               </CardDescription>
             </CardHeader>

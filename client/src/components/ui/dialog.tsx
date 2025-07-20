@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import * as VisuallyHidden  from "@radix-ui/react-visually-hidden";
 
 import { cn } from "@/lib/utils";
 
@@ -11,6 +12,8 @@ const DialogTrigger = DialogPrimitive.Trigger;
 const DialogPortal = DialogPrimitive.Portal;
 
 const DialogClose = DialogPrimitive.Close;
+
+const VisuallyHide = VisuallyHidden.Root;
 
 const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
@@ -118,4 +121,5 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
+  VisuallyHide,
 };
