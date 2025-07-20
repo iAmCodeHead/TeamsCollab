@@ -17,12 +17,20 @@ authRoutes.post("/login", loginController);
 
 authRoutes.post("/logout", logOutController);
 
-authRoutes.get(
-  "/google",
+authRoutes.get("/google", (req, res, next) => {
+  const returnUrl = req.query.returnUrl || "/";
   passport.authenticate("google", {
     scope: ["profile", "email"],
-  })
-);
+    state: JSON.stringify({ returnUrl }),
+  })(req, res, next);
+});
+
+// authRoutes.get(
+//   "/google",
+//   passport.authenticate("google", {
+//     scope: ["profile", "email"],
+//   })
+// );
 
 authRoutes.get(
   "/google/callback",
