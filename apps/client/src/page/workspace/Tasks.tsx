@@ -1,5 +1,6 @@
 import CreateTaskDialog from "@/components/workspace/task/create-task-dialog";
 import TaskTable from "@/components/workspace/task/task-table";
+import { DocumentUploadDialog } from "@/components/workspace/task/upload-document.dialog";
 
 export default function Tasks() {
   return (
@@ -12,6 +13,7 @@ export default function Tasks() {
           </p>
         </div>
         <CreateTaskDialog />
+        <DocumentUploadDialog />
       </div>
       {/* {Task Table} */}
       <div>
